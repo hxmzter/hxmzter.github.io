@@ -1536,6 +1536,18 @@
             color: var(--light-gray);
         }
 
+        /* Form success message */
+        .form-success-message {
+            display: none;
+            background-color: rgba(78, 205, 196, 0.1);
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -2139,7 +2151,7 @@
                                 </div>
                                 <div class="contact-info-text">
                                     <h4>Email</h4>
-                                    <a href="mailto:info@matrixxagency.com">info@matrixxagency.com</a>
+                                    <a href="mailto:thematrixxagency@gmail.com">thematrixxagency@gmail.com</a>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -2170,20 +2182,23 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formspree.io/f/mjkrwlvb" method="POST">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name" required>
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email" required>
+                                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Subject">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message" required></textarea>
+                                <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
+                            <div class="form-success-message" id="formSuccessMessage">
+                                Thank you for your message! We will get back to you soon.
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -2233,8 +2248,9 @@
                 <div class="footer-column footer-newsletter">
                     <h3>Newsletter</h3>
                     <p>Subscribe to our newsletter to receive updates and insights on digital trends.</p>
-                    <form class="newsletter-form">
-                        <input type="email" class="newsletter-input" placeholder="Your Email" required>
+                    <form class="newsletter-form" action="https://formspree.io/f/mjkrwlvb" method="POST">
+                        <input type="hidden" name="form-type" value="newsletter">
+                        <input type="email" name="email" class="newsletter-input" placeholder="Your Email" required>
                         <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
@@ -2444,23 +2460,31 @@
                 });
             });
             
-            // Form submission
+            // Form submission - allow Formspree to handle it
             const contactForm = document.getElementById('contactForm');
+            const successMessage = document.getElementById('formSuccessMessage');
+            
             if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Thank you for your message! We will get back to you soon.');
-                    contactForm.reset();
+                contactForm.addEventListener('submit', function() {
+                    // This is handled by Formspree now, so we don't need preventDefault()
+                    
+                    // Optional: You can still show a local message
+                    setTimeout(function() {
+                        successMessage.style.display = 'block';
+                    }, 1000);
                 });
             }
             
-            // Newsletter form
+            // Newsletter form - allow Formspree to handle it
             const newsletterForm = document.querySelector('.newsletter-form');
             if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Thank you for subscribing to our newsletter!');
-                    newsletterForm.reset();
+                newsletterForm.addEventListener('submit', function() {
+                    // This is handled by Formspree now, so we don't need preventDefault()
+                    
+                    // Optional: You can still show a local message
+                    setTimeout(function() {
+                        alert('Thank you for subscribing to our newsletter!');
+                    }, 500);
                 });
             }
         });
