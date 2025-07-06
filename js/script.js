@@ -1,6 +1,9 @@
 // Check if device supports hover (desktop)
 const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+// Session storage for loading screen
+const hasVisitedBefore = sessionStorage.getItem('hasVisited');
+
 // Create floating particles
 document.addEventListener('DOMContentLoaded', function() {
     const particlesContainer = document.getElementById('particles');
@@ -84,12 +87,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Loading Screen
+    // Enhanced Loading Screen - only on first visit of session
     const loader = document.getElementById('loader');
     if (loader) {
-        setTimeout(() => {
+        if (!hasVisitedBefore && currentPage === 'index.html') {
+            // Show loading screen on first visit
+            setTimeout(() => {
+                loader.classList.add('hide');
+                sessionStorage.setItem('hasVisited', 'true');
+            }, 2500);
+        } else {
+            // Hide loading screen immediately on subsequent visits
             loader.classList.add('hide');
-        }, 1000);
+        }
+    }
+
+    // Smooth scrolling for scroll indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator a');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = document.querySelector('#services');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     }
 
     // Scroll Effects
