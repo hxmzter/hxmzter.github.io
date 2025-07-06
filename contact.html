@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Matrixx Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="https://i.postimg.cc/hG7K8jdW/matrixx-agency-removebg-preview-1-1.png" alt="Matrixx Agency" class="logo-img">
+                <span class="logo-text">Matrixx Agency</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="web-design.html">Web Design</a></li>
+                <li><a href="paid-ads.html">Paid Ads</a></li>
+                <li><a href="ai-automation.html">AI & Automation</a></li>
+                <li><a href="social-media.html">Social Media</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="/">Home</a>
+        <a href="web-design.html">Web Design</a>
+        <a href="paid-ads.html">Paid Ads</a>
+        <a href="ai-automation.html">AI & Automation</a>
+        <a href="social-media.html">Social Media</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section style="padding: 4rem 2rem;">
+            <h2 class="section-title">Let's Create Something Amazing</h2>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <p style="font-size: 1.3rem; opacity: 0.8;">Ready to take your digital presence to the next dimension?</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div>
+                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mjkrwlvb" method="POST">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder=" " required>
+                                <label for="name">Your Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder=" " required>
+                                <label for="email">Email Address</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="company" name="company" placeholder=" ">
+                                <label for="company">Company Name</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                            <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
+                            <div class="form-status" id="formStatus"></div>
+                        </form>
+                    </div>
+                    
+                    <div style="padding: 2rem;">
+                        <div class="glass-card" style="margin-bottom: 2rem;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Quick Connect</h3>
+                            <p style="margin-bottom: 1rem;"><i class="fas fa-envelope"></i> hello@matrixxagency.com</p>
+                            <p style="margin-bottom: 1rem;"><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                            <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                        </div>
+                        
+                        <div class="glass-card">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Office Hours</h3>
+                            <p style="margin-bottom: 0.5rem;">Monday - Friday: 9AM - 6PM PST</p>
+                            <p style="margin-bottom: 0.5rem;">Saturday: 10AM - 4PM PST</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; text-align: center;">
+                            <p style="margin-bottom: 1rem;">Or book a call directly:</p>
+                            <a href="https://calendly.com/thematrixxagency/30min" target="_blank" class="cta-button">Schedule Strategy Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
