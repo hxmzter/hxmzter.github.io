@@ -74,15 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Set active navigation link
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    // Set active navigation link - Updated for GitHub Pages
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/');
+    const currentPage = pathParts[pathParts.length - 1] || 'index.html';
+    
     const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
     
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage || 
-            (currentPage === 'index.html' && href === 'index.html') ||
-            (currentPage === '' && href === 'index.html')) {
+        const hrefParts = href.split('/');
+        const linkPage = hrefParts[hrefParts.length - 1];
+        
+        if (linkPage === currentPage || 
+            (currentPage === '' && linkPage === 'index.html') ||
+            (currentPath.endsWith('/') && linkPage === 'index.html')) {
             link.classList.add('active');
         }
     });
@@ -90,7 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced Loading Screen - only on first visit of session
     const loader = document.getElementById('loader');
     if (loader) {
-        if (!hasVisitedBefore && currentPage === 'index.html') {
+        const isHomePage = currentPage === 'index.html' || currentPage === '' || currentPath.endsWith('/');
+        
+        if (!hasVisitedBefore && isHomePage) {
             // Show loading screen on first visit
             setTimeout(() => {
                 loader.classList.add('hide');
