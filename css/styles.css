@@ -286,18 +286,6 @@ nav {
     min-height: 100vh;
     padding-top: 100px;
     position: relative;
-    animation: pageTransition 0.6s ease;
-}
-
-@keyframes pageTransition {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Hero Section */
@@ -426,6 +414,54 @@ nav {
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 40px rgba(168, 85, 247, 0.6);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.scroll-indicator a {
+    display: block;
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--primary-silver);
+    border-radius: 25px;
+    position: relative;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-indicator a:hover {
+    opacity: 1;
+}
+
+.scroll-indicator a::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--primary-silver);
+    border-radius: 50%;
+    animation: scrollAnimation 2s infinite;
+}
+
+@keyframes scrollAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
 }
 
 /* Glass Cards */
@@ -675,7 +711,7 @@ nav {
     filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
 }
 
-/* Loading Animation */
+/* Enhanced Loading Animation */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -687,26 +723,75 @@ nav {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 .loading-screen.hide {
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
 }
 
-.loader {
-    width: 100px;
-    height: 100px;
-    border: 3px solid var(--glass-border);
-    border-top-color: var(--primary-blue);
-    border-right-color: var(--primary-violet);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.loading-container {
+    text-align: center;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+.loading-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8));
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8));
+    }
+    50% { 
+        transform: scale(1.1); 
+        filter: drop-shadow(0 0 50px rgba(168, 85, 247, 1));
+    }
+}
+
+.loading-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-violet), var(--primary-blue));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: loadingGradient 2s ease-in-out infinite;
+}
+
+@keyframes loadingGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.loading-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-violet));
+    border-radius: 4px;
+    animation: loadingProgress 2s ease-in-out;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
 /* Mobile Navigation */
@@ -801,7 +886,8 @@ nav {
     }
 
     .logo-text {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        display: inline-block !important;
     }
 
     .mission-grid {
@@ -812,6 +898,6 @@ nav {
 
 @media (max-width: 480px) {
     .logo-text {
-        display: none;
+        font-size: 0.9rem;
     }
 }
