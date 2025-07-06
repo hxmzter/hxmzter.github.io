@@ -29,7 +29,13 @@
             background: var(--dark-bg);
             color: var(--primary-silver);
             overflow-x: hidden;
-            cursor: none;
+        }
+
+        /* Only show custom cursor on desktop */
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
         }
 
         /* Animated Background */
@@ -123,28 +129,36 @@
             }
         }
 
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: screen;
-            transition: transform 0.2s ease;
+        /* Custom Cursor - only on desktop */
+        .cursor, .cursor-follower {
+            display: none;
         }
 
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--primary-violet);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.5s ease;
+        @media (hover: hover) and (pointer: fine) {
+            .cursor {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background: var(--primary-blue);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: screen;
+                transition: transform 0.2s ease;
+            }
+
+            .cursor-follower {
+                display: block;
+                width: 40px;
+                height: 40px;
+                border: 2px solid var(--primary-violet);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9998;
+                transition: transform 0.5s ease;
+            }
         }
 
         /* Navigation */
@@ -185,6 +199,15 @@
             transition: transform 0.3s ease;
         }
 
+        .logo-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-silver);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
         @keyframes logoGlow {
             from { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
             to { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)); }
@@ -192,6 +215,10 @@
 
         .logo:hover .logo-img {
             transform: scale(1.05);
+        }
+
+        .logo:hover .logo-text {
+            color: var(--primary-blue);
         }
 
         .nav-links {
@@ -598,6 +625,50 @@
             50% { width: 150px; }
         }
 
+        /* Mission Sections */
+        .mission-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mission-section {
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .mission-section h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mission-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .nav-links {
@@ -611,6 +682,10 @@
 
             .contact-grid {
                 grid-template-columns: 1fr !important;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
             }
         }
 
@@ -643,6 +718,21 @@
             .logo-img {
                 height: 40px;
             }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                display: none;
+            }
         }
 
         /* Mobile Navigation */
@@ -658,10 +748,14 @@
             transition: transform 0.3s ease;
             z-index: 999;
             border-bottom: 1px solid var(--glass-border);
+            visibility: hidden;
+            opacity: 0;
         }
 
         .mobile-nav.active {
             transform: translateY(0);
+            visibility: visible;
+            opacity: 1;
         }
 
         .mobile-nav a {
@@ -786,7 +880,8 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="#" class="logo" data-page="home">
-                <img src="https://i.postimg.cc/BZBwz0Tr/matrixx-agency-removebg-preview-1.png" alt="Matrixx Agency" class="logo-img">
+                <img src="https://i.postimg.cc/hG7K8jdW/matrixx-agency-removebg-preview-1-1.png" alt="Matrixx Agency" class="logo-img">
+                <span class="logo-text">Matrixx Agency</span>
             </a>
             <ul class="nav-links">
                 <li><a href="#" data-page="home">Home</a></li>
@@ -886,7 +981,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 4rem;">
-                <a href="https://calendly.com/thematrixxagency/30min" target="_blank" class="cta-button">Get a Free Strategy Call</a>
+                <a href="#" class="cta-button" data-page="contact">Craft My Digital Masterpiece</a>
             </div>
         </section>
     </div>
@@ -1029,50 +1124,55 @@
     <div class="page" id="about">
         <section style="padding: 4rem 2rem;">
             <h2 class="section-title">About Matrixx</h2>
-            <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="mission-content">
                 <div style="text-align: center; margin-bottom: 4rem;">
-                    <p style="font-size: 1.3rem; opacity: 0.8;">We're not just another agency. We're digital architects building the future.</p>
+                    <p style="font-size: 1.4rem; opacity: 0.9; line-height: 1.6;">We're not just another agency. We're digital architects building the future, one breakthrough at a time.</p>
                 </div>
                 
-                <div class="glass-card" style="max-width: 800px; margin: 0 auto 4rem;">
-                    <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Our Mission</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.8;">To push the boundaries of what's possible in digital design and create experiences that don't just meet expectations – they shatter them. We believe every pixel should have purpose, every animation should tell a story, and every interaction should feel like magic.</p>
+                <div class="glass-card" style="max-width: 900px; margin: 0 auto 4rem; text-align: center;">
+                    <div class="mission-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Our Core Mission</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">To democratize cutting-edge technology and make it accessible to every business, regardless of size or budget. We believe that exceptional digital experiences shouldn't be a luxury reserved for Fortune 500 companies—they should be the standard for everyone.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.8;">Every line of code we write, every design we craft, and every strategy we develop is guided by one principle: empowering people with technology that actually makes their lives better.</p>
                 </div>
                 
-                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 3rem;">Our Team</h3>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="service-icon">
-                            <i class="fas fa-user-tie"></i>
+                <div class="mission-grid">
+                    <div class="mission-section">
+                        <div class="mission-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <h4>Alex Chen</h4>
-                        <p style="color: var(--primary-blue);">Creative Director</p>
-                        <p style="font-size: 0.9rem; margin-top: 1rem;">Visionary designer with 10+ years crafting digital experiences</p>
+                        <h3>People-First Technology</h3>
+                        <p>We don't build technology for the sake of technology. Every solution we create is designed with real people in mind—your customers, your team, and your goals. We obsess over user experience because we know that technology should serve humanity, not the other way around.</p>
                     </div>
-                    <div class="team-member">
-                        <div class="service-icon">
-                            <i class="fas fa-user"></i>
+                    
+                    <div class="mission-section">
+                        <div class="mission-icon">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h4>Sarah Johnson</h4>
-                        <p style="color: var(--primary-violet);">Lead Developer</p>
-                        <p style="font-size: 0.9rem; margin-top: 1rem;">Full-stack wizard turning designs into living, breathing websites</p>
+                        <h3>Innovation Without Intimidation</h3>
+                        <p>The latest AI, cutting-edge web technologies, and advanced automation should enhance your business, not overwhelm it. We translate complex tech into simple, powerful solutions that you can actually use and understand. No jargon, no confusion—just results.</p>
                     </div>
-                    <div class="team-member">
-                        <div class="service-icon">
-                            <i class="fas fa-user-tie"></i>
+                    
+                    <div class="mission-section">
+                        <div class="mission-icon">
+                            <i class="fas fa-handshake"></i>
                         </div>
-                        <h4>Marcus Rivera</h4>
-                        <p style="color: var(--primary-blue);">Strategy Director</p>
-                        <p style="font-size: 0.9rem; margin-top: 1rem;">Data-driven strategist optimizing for growth and conversions</p>
+                        <h3>Partnership Beyond Projects</h3>
+                        <p>We're not just service providers—we're your technology partners for the long haul. Your success is our success. We invest in understanding your business deeply because we know that the best digital solutions come from genuine partnership, not one-size-fits-all templates.</p>
                     </div>
-                    <div class="team-member">
-                        <div class="service-icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h4>Emma Watson</h4>
-                        <p style="color: var(--primary-violet);">Motion Designer</p>
-                        <p style="font-size: 0.9rem; margin-top: 1rem;">Animation expert bringing interfaces to life with stunning effects</p>
-                    </div>
+                </div>
+                
+                <div class="glass-card" style="max-width: 800px; margin: 4rem auto; text-align: center;">
+                    <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary-blue);">Why We Do This</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">Because we've seen too many businesses struggle with technology that promises the world but delivers frustration. We've witnessed small businesses getting priced out of quality digital solutions while others get trapped by overcomplicated systems they can't maintain.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1.5rem;">That's why we exist—to bridge the gap between what's possible with technology and what's practical for your business. We're here to ensure that every business has access to world-class digital experiences and the support to make the most of them.</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 4rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; opacity: 0.9;">Ready to experience technology that actually serves you?</h3>
+                    <a href="#" class="cta-button" data-page="contact">Let's Transform Your Business Together</a>
                 </div>
             </div>
         </section>
@@ -1137,6 +1237,9 @@
     </div>
 
     <script>
+        // Check if device supports hover (desktop)
+        const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 50; i++) {
@@ -1148,19 +1251,34 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
+        // Custom Cursor - only on desktop
+        if (hasHover) {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX - 10 + 'px';
-                cursorFollower.style.top = e.clientY - 10 + 'px';
-            }, 100);
-        });
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX - 10 + 'px';
+                    cursorFollower.style.top = e.clientY - 10 + 'px';
+                }, 100);
+            });
+
+            // Hover Effects Enhancement - only for desktop
+            document.querySelectorAll('a, button').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorFollower.style.transform = 'scale(1.5)';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        }
 
         // Page Navigation
         const pages = document.querySelectorAll('.page');
@@ -1178,8 +1296,10 @@
             }
             
             // Close mobile menu if open
-            document.getElementById('mobileNav').classList.remove('active');
-            document.getElementById('mobileMenuToggle').classList.remove('active');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            mobileNav.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
         }
 
         navLinks.forEach(link => {
@@ -1194,9 +1314,23 @@
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileNav = document.getElementById('mobileNav');
 
-        mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileMenuToggle.classList.toggle('active');
             mobileNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileNav.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
+        });
+
+        // Prevent mobile menu from closing when clicking inside it
+        mobileNav.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
 
         // Loading Screen
@@ -1271,19 +1405,6 @@
             }
         });
 
-        // Hover Effects Enhancement
-        document.querySelectorAll('a, button').forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(1.5)';
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
-            });
-        });
-
         // Intersection Observer for Animations
         const observerOptions = {
             threshold: 0.1,
@@ -1300,7 +1421,7 @@
         }, observerOptions);
 
         // Observe elements
-        document.querySelectorAll('.glass-card, .service-card, .team-member').forEach(el => {
+        document.querySelectorAll('.glass-card, .service-card, .mission-section').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
