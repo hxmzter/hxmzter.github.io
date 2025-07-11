@@ -18,43 +18,12 @@ body {
     background: var(--dark-bg);
     color: var(--primary-silver);
     overflow-x: hidden;
+    /* Remove cursor: none - use default cursor */
 }
 
-/* Only show custom cursor on desktop */
-@media (hover: hover) and (pointer: fine) {
-    body {
-        cursor: none;
-    }
-    
-    .cursor {
-        display: block;
-        width: 20px;
-        height: 20px;
-        background: var(--primary-blue);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        mix-blend-mode: screen;
-        transition: transform 0.2s ease;
-    }
-
-    .cursor-follower {
-        display: block;
-        width: 40px;
-        height: 40px;
-        border: 2px solid var(--primary-violet);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9998;
-        transition: transform 0.5s ease;
-    }
-}
-
-/* Hide cursor on mobile */
+/* Remove custom cursor completely */
 .cursor, .cursor-follower {
-    display: none;
+    display: none !important;
 }
 
 /* Animated Background */
